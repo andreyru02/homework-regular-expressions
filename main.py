@@ -37,7 +37,11 @@ for elem in contacts_sub:
         cont.append(elem[2])
     if elem[3] != '':
         cont.append(elem[3])
-    if elem[4] != '':
+    if elem[4] == 'position':
+        cont.append(elem[4])
+    elif elem[4] == '':
+        cont.append('')
+    else:
         cont.append(elem[4])
 
     if elem[5] != int:
