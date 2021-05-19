@@ -15,20 +15,26 @@ sub_name = r'\1\3\10\4\6\9\7\8'
 pattern_phone = r'(\+7|8)(\s*)(\(*)(\d{3})(\)*)(\s*)(\-*)(\d{3})(\s*)(\-*)(\d{2})(\s*)(\-*)(\d{2})(\s*)(\(*)(доб)*(\.*)(\s*)(\d+)*(\)*)'
 sub_phone = r'+7(\4)\8-\11-\14\15\17\18\19\20'
 
-contacts_sub = []
+contacts_sub_phone = []
 contacts_edit = []
 cont = []
 contacts_new = []
+contacts_sub = []
 
 for contact in contacts_list:
     el = ','.join(contact)
-    substitution_name = re.sub(pattern_name, sub_name, el)
-    sub_split_name = substitution_name.split(',')
 
     substitution_phone = re.sub(pattern_phone, sub_phone, el)
     sub_split_phone = substitution_phone.split(',')
 
-    contacts_sub.append(sub_split_phone and sub_split_name)
+    # contacts_sub.append(sub_split_phone and sub_split_name)
+    contacts_sub_phone.append(sub_split_phone)
+
+for contacts_sub_name in contacts_sub_phone:
+    el = ','.join(contacts_sub_name)
+    substitution_name = re.sub(pattern_name, sub_name, el)
+    sub_split_name = substitution_name.split(',')
+    contacts_sub.append(sub_split_name)
 
 for elem in contacts_sub:
     cont.append(elem[0])
@@ -66,7 +72,6 @@ for find_duplicate in contacts_edit:
     if count == 0:
         contacts_new.append(find_duplicate)
     count = 0
-
 
 pprint(contacts_new)
 
